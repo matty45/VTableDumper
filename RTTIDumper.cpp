@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
 
 		if (strcmp(file_type, "macho") != 0 && strcmp(file_type, "mspe") != 0)
 		{
-			printf("Invalid file type.\n");
+			printf("Error: Invalid file type.\n");
 			return 0;
 		}
 
@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
 			check_binary(binary_path);
 	}
 	else if (argc > 3)
-		printf("Invalid number of arguments. Exiting.\n");
+		printf("Error: Invalid number of arguments. Exiting.\n");
 
 	return 0;
 }
