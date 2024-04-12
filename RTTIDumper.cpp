@@ -6,6 +6,7 @@
 #include <fstream>
 #include "kaitai/kaitaistream.h"
 #include "parsers/mach_o/mach_o.h"
+#include "parsers/microsoft_pe/microsoft_pe.h"
 
 //globals
 char* file_type;
@@ -23,6 +24,11 @@ void dump_macho()
 
 void dump_mspe()
 {
+	std::ifstream input(binary_path, std::ios::binary);
+
+	kaitai::kstream ks(&input);
+
+	microsoft_pe_t data(&ks);
 }
 
 int main(int argc, char* argv[])
@@ -53,6 +59,7 @@ int main(int argc, char* argv[])
 			return 0;
 		}
 
+		printf("Dumping...\n");
 		if (strcmp(file_type, "macho") == 0)
 			dump_macho();
 
