@@ -4,6 +4,8 @@
 #include <cstdio>
 #include <filesystem>
 #include <fstream>
+#include <iostream>
+
 #include "kaitai/kaitaistream.h"
 #include "parsers/mach_o/mach_o.h"
 #include "parsers/microsoft_pe/microsoft_pe.h"
@@ -19,7 +21,6 @@ void dump_macho()
 	kaitai::kstream ks(&input);
 
 	mach_o_t data(&ks);
-	printf("ass %i\n", (int)data.magic());
 }
 
 void dump_mspe()
@@ -29,6 +30,13 @@ void dump_mspe()
 	kaitai::kstream ks(&input);
 
 	microsoft_pe_t data(&ks);
+
+	std::vector<microsoft_pe_t::section_t*>* sections = data.pe()->sections();
+
+	for (microsoft_pe_t::section_t* i : *sections)
+	{
+		auto test = i->body();
+	}
 }
 
 int main(int argc, char* argv[])
