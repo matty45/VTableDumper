@@ -7,7 +7,11 @@
 #include "kaitai/kaitaistream.h"
 #include "parsers/mach_o/mach_o.h"
 
-void check_binary(char* binary_path)
+//globals
+char* file_type;
+char* binary_path;
+
+void dump_macho()
 {
 	std::ifstream input(binary_path, std::ios::binary);
 
@@ -15,7 +19,11 @@ void check_binary(char* binary_path)
 
 	mach_o_t data(&ks);
 	printf("ass %i\n", (int)data.magic());
-};
+}
+
+void dump_mspe()
+{
+}
 
 int main(int argc, char* argv[])
 {
@@ -30,7 +38,7 @@ int main(int argc, char* argv[])
 	if (argc == 3) {
 		printf("Attempting to dump \"%s\" with file type \"%s\"\n", argv[1], argv[2]);
 
-		char* file_type = argv[2];
+		file_type = argv[2];
 
 		if (strcmp(file_type, "macho") != 0 && strcmp(file_type, "mspe") != 0)
 		{
@@ -38,9 +46,18 @@ int main(int argc, char* argv[])
 			return 0;
 		}
 
-		char* binary_path = argv[1];
-		if (std::filesystem::exists(binary_path))
-			check_binary(binary_path);
+		binary_path = argv[1];
+		if (!std::filesystem::exists(binary_path))
+		{
+			printf("Error: Invalid file path.\n");
+			return 0;
+		}
+
+		if (strcmp(file_type, "macho") == 0)
+			dump_macho();
+
+		if (strcmp(file_type, "mspe") == 0)
+			dump_mspe();
 	}
 	else if (argc > 3)
 		printf("Error: Invalid number of arguments. Exiting.\n");
