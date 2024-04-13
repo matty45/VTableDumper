@@ -1,2 +1,4 @@
 Thanks to GrandpaGameHacker for his classdumper3 tool that ive used as a basis for getting rtti from msvc executables.
 https://github.com/GrandpaGameHacker/ClassDumper3
+
+https://github.com/lvc/vtable-dumper

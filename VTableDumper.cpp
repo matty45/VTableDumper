@@ -3,12 +3,9 @@
 
 #include <cstdio>
 #include <filesystem>
-#include <fstream>
 #include <iostream>
 
-#include "kaitai/kaitaistream.h"
-#include "parsers/mach_o/mach_o.h"
-#include "parsers/microsoft_pe/microsoft_pe.h"
+#include "Dumper.h"
 
 //globals
 char* file_type;
@@ -16,41 +13,16 @@ char* binary_path;
 
 void dump_macho()
 {
-	std::ifstream input(binary_path, std::ios::binary);
+	/*std::ifstream input(binary_path, std::ios::binary);
 
 	kaitai::kstream ks(&input);
 
-	mach_o_t data(&ks);
+	mach_o_t data(&ks);*/
 }
-
-std::vector<microsoft_pe_t::section_t*> read_only_sections;
-std::vector<microsoft_pe_t::section_t*> executable_sections;
 
 void dump_mspe()
 {
-	std::ifstream input(binary_path, std::ios::binary);
-
-	kaitai::kstream ks(&input);
-
-	microsoft_pe_t data(&ks);
-
-	// Get pe sections and iterate through them.
-	std::vector<microsoft_pe_t::section_t*>* sections = data.pe()->sections();
-
-	for (microsoft_pe_t::section_t* i : *sections)
-	{
-		// Check if each section is executable
-		bool is_executable = i->characteristics() & 0x20000000;  // Section is executable.
-
-		if (is_executable)
-			executable_sections.push_back(i);
-	}
-
-	if (read_only_sections.empty())
-	{
-		printf("Error, failed to find any executable sections in the pe.\n");
-		throw;
-	}
+	Dumper::MSPE::Dump(binary_path);
 }
 
 int main(int argc, char* argv[])

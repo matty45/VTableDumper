@@ -143,12 +143,14 @@
     <ClCompile Include="parsers\asn1_der.cpp" />
     <ClCompile Include="parsers\mach_o\mach_o.cpp" />
     <ClCompile Include="parsers\microsoft_pe\microsoft_pe.cpp" />
+    <ClCompile Include="Dumper.cpp" />
     <ClCompile Include="VTableDumper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="parsers\asn1_der.h" />
     <ClInclude Include="parsers\mach_o\mach_o.h" />
     <ClInclude Include="parsers\microsoft_pe\microsoft_pe.h" />
+    <ClInclude Include="Dumper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
