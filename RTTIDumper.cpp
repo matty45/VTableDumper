@@ -23,6 +23,9 @@ void dump_macho()
 	mach_o_t data(&ks);
 }
 
+std::vector<microsoft_pe_t::section_t*> read_only_sections;
+std::vector<microsoft_pe_t::section_t*> executable_sections;
+
 void dump_mspe()
 {
 	std::ifstream input(binary_path, std::ios::binary);
@@ -31,11 +34,26 @@ void dump_mspe()
 
 	microsoft_pe_t data(&ks);
 
+	// Get pe sections and iterate through them.
 	std::vector<microsoft_pe_t::section_t*>* sections = data.pe()->sections();
 
 	for (microsoft_pe_t::section_t* i : *sections)
 	{
-		auto test = i->body();
+		// Check if each section is read only or executable
+		bool is_executable = i->characteristics() & 0x20000000;  // Section is executable.
+		bool is_read_only = i->characteristics() & 0x40000000;  // Section is readable.
+
+		if (is_read_only)
+			read_only_sections.push_back(i);
+
+		if (is_executable)
+			executable_sections.push_back(i);
+	}
+
+	if (read_only_sections.empty() || read_only_sections.empty())
+	{
+		printf("Error, failed to find any sections in the pe.\n");
+		throw;
 	}
 }
 
@@ -57,14 +75,14 @@ int main(int argc, char* argv[])
 		if (strcmp(file_type, "macho") != 0 && strcmp(file_type, "mspe") != 0)
 		{
 			printf("Error: Invalid file type.\n");
-			return 0;
+			return 1;
 		}
 
 		binary_path = argv[1];
 		if (!std::filesystem::exists(binary_path))
 		{
 			printf("Error: Invalid file path.\n");
-			return 0;
+			return 1;
 		}
 
 		printf("Dumping...\n");
