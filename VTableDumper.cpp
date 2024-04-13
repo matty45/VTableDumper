@@ -62,9 +62,13 @@ int main(int argc, char* argv[])
 	//Print help information if no arguments are supplied.
 	if (argc == 1)
 	{
-		printf("This program attempts to dump RTTI info from binary files made using either MSVC or GCC and attempt to make header files from them.\n");
+		printf("This program attempts to dump VTables from binary files made using either MSVC or GCC and attempt to make header files from them.\n");
+		printf("This works best with binaries that have either RTTI or Symbols.\n");
 		printf("Microsoft PE: mspe Mach object file format: macho - More types will be added soon.\n");
 		printf("Usage: VTableDumper.exe \"path/to/binary\" macho/mspe\n");
+
+		printf("\nNo command line arguments entered, please press any key to exit.\n");
+		std::cin.get();
 	}
 
 	if (argc == 3) {
