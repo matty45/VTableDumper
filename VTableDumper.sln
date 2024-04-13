@@ -5,6 +5,11 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VTableDumper", "VTableDumper.vcxproj", "{3DC54BC0-5B93-4FDF-B0A2-968C3E710B1C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EF2562F9-0E03-430B-8CD7-41F37FB14EA9}"
+	ProjectSection(SolutionItems) = preProject
+		credits.txt = credits.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
