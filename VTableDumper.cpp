@@ -1,4 +1,4 @@
-// RTTIDumper.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// VTableDumper.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
 #include <cstdio>
@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
 	{
 		printf("This program attempts to dump RTTI info from binary files made using either MSVC or GCC and attempt to make header files from them.\n");
 		printf("Microsoft PE: mspe Mach object file format: macho - More types will be added soon.\n");
-		printf("Usage: RTTIDumper.exe \"path/to/binary\" macho/mspe\n");
+		printf("Usage: VTableDumper.exe \"path/to/binary\" macho/mspe\n");
 	}
 
 	if (argc == 3) {

@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RTTIDumper.cpp">
+    <ClCompile Include="VTableDumper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
