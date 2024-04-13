@@ -39,20 +39,16 @@ void dump_mspe()
 
 	for (microsoft_pe_t::section_t* i : *sections)
 	{
-		// Check if each section is read only or executable
+		// Check if each section is executable
 		bool is_executable = i->characteristics() & 0x20000000;  // Section is executable.
-		bool is_read_only = i->characteristics() & 0x40000000;  // Section is readable.
-
-		if (is_read_only)
-			read_only_sections.push_back(i);
 
 		if (is_executable)
 			executable_sections.push_back(i);
 	}
 
-	if (read_only_sections.empty() || read_only_sections.empty())
+	if (read_only_sections.empty())
 	{
-		printf("Error, failed to find any sections in the pe.\n");
+		printf("Error, failed to find any executable sections in the pe.\n");
 		throw;
 	}
 }
@@ -67,7 +63,7 @@ int main(int argc, char* argv[])
 		printf("Microsoft PE: mspe Mach object file format: macho - More types will be added soon.\n");
 		printf("Usage: VTableDumper.exe \"path/to/binary\" macho/mspe\n");
 
-		printf("\nNo command line arguments entered, please press any key to exit.\n");
+		printf("\nError: No command line arguments entered, please press any key to exit.\n");
 		std::cin.get();
 	}
 
